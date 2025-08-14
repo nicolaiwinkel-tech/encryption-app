@@ -146,7 +146,7 @@
             combined.set(encryptedArray, iv.length);
 
             const base64Encrypted = btoa(String.fromCharCode(...combined));
-            document.getElementById('output').innerText = `Encrypted: ${base64Encrypted}`;
+            document.getElementById('output').innerText = `${base64Encrypted}`;
         }
 
         async function decryptText() {
@@ -175,7 +175,7 @@
                 );
 
                 const decoder = new TextDecoder();
-                document.getElementById('output').innerText = `Decrypted: ${decoder.decode(decrypted)}`;
+                document.getElementById('output').innerText = `${decoder.decode(decrypted)}`;
             } catch (e) {
                 document.getElementById('output').innerText = 'Decryption failed. Wrong password?';
             }
@@ -207,3 +207,4 @@
     </script>
 </body>
 </html>
+
