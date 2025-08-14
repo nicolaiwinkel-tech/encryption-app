@@ -1,24 +1,19 @@
-const CACHE_NAME = 'encryptor-app-v1';
+const CACHE_NAME = 'encryptor-app-v3';  // Bump to v3 to clear old cache
 const urlsToCache = [
-  '/',
-  '/index.html',
-  // Add any other assets if needed (e.g., '/styles.css' if you extract CSS)
+  './',  // Relative paths
+  './index.html',
+  // Add more if needed
 ];
 
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
+        console.log('Caching files');  // For debugging
         return cache.addAll(urlsToCache);
       })
   );
+  self.skipWaiting();
 });
 
-self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        return response || fetch(event.request);
-      })
-  );
-});
+// ... (The rest of the service-worker.js from my previous response remains the same)
