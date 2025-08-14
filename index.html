@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,6 +55,13 @@
             white-space: pre-wrap;
             word-wrap: break-word;
         }
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .action-buttons button {
+            flex: 1;
+        }
     </style>
 </head>
 <body>
@@ -63,9 +69,15 @@
         <h1>Password Encryption Tool</h1>
         <input type="password" id="masterPassword" placeholder="Enter Master Password" required>
         <textarea id="inputText" rows="4" placeholder="Enter text to encrypt/decrypt"></textarea>
-        <button onclick="encryptText()">Encrypt</button>
-        <button onclick="decryptText()">Decrypt</button>
+        <div class="action-buttons">
+            <button onclick="encryptText()">Encrypt</button>
+            <button onclick="decryptText()">Decrypt</button>
+        </div>
         <div id="output"></div>
+        <div class="action-buttons" style="margin-top: 10px;">
+            <button onclick="copyOutput()">Copy Output</button>
+            <button onclick="clearAll()">Clear</button>
+        </div>
     </div>
 
     <script>
@@ -168,7 +180,30 @@
                 document.getElementById('output').innerText = 'Decryption failed. Wrong password?';
             }
         }
+
+        // New: Copy Output to Clipboard
+        function copyOutput() {
+            const outputText = document.getElementById('output').innerText;
+            if (!outputText) {
+                alert('Nothing to copy!');
+                return;
+            }
+            navigator.clipboard.writeText(outputText)
+                .then(() => {
+                    alert('Output copied to clipboard!');
+                })
+                .catch(err => {
+                    console.error('Failed to copy: ', err);
+                    alert('Failed to copy. Please try manually.');
+                });
+        }
+
+        // New: Clear All Fields
+        function clearAll() {
+            document.getElementById('masterPassword').value = '';
+            document.getElementById('inputText').value = '';
+            document.getElementById('output').innerText = '';
+        }
     </script>
 </body>
 </html>
-```
