@@ -7,6 +7,9 @@
     <title>Password Encryption Tool</title>
     <link rel="manifest" href="./manifest.json">
     <link rel="apple-touch-icon" href="./icons/icon-192x192.png">
+    <!-- Favicon for browser tab (using the existing 192x192 icon; works in modern browsers) -->
+    <link rel="icon" href="./icons/icon-192x192.png" sizes="192x192">
+    <link rel="icon" href="./icons/icon-512x512.png" sizes="512x512">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -146,7 +149,7 @@
             combined.set(encryptedArray, iv.length);
 
             const base64Encrypted = btoa(String.fromCharCode(...combined));
-            document.getElementById('output').innerText = `${base64Encrypted}`;
+            document.getElementById('output').innerText = `Encrypted: ${base64Encrypted}`;
         }
 
         async function decryptText() {
@@ -175,7 +178,7 @@
                 );
 
                 const decoder = new TextDecoder();
-                document.getElementById('output').innerText = `${decoder.decode(decrypted)}`;
+                document.getElementById('output').innerText = `Decrypted: ${decoder.decode(decrypted)}`;
             } catch (e) {
                 document.getElementById('output').innerText = 'Decryption failed. Wrong password?';
             }
@@ -207,4 +210,3 @@
     </script>
 </body>
 </html>
-
